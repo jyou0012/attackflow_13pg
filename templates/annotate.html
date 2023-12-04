@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annotate</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+
+</head>
+
+<body>
+    <canvas id="pdfCanvas"></canvas>
+    <p></p>
+    <input type="file" id="fileInput">
+
+
+    <script>
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+        const fileInput = document.getElementById('fileInput');
+        const pdfCanvas = document.getElementById('pdfCanvas');
+        const ctx = pdfCanvas.getContext('2d');
+
+        let pdfDoc = null;
+        let pageNum = 1;
+
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            if (file.type === 'application/pdf') {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const typedArray = new Uint8Array(e.target.result);
+                    pdfjsLib.getDocument(typedArray).promise.then(function (pdf) {
+                        pdfDoc = pdf;
+                        renderPage(pageNum);
+                    });
+                }
+                reader.readAsArrayBuffer(file);
+            }
+        });
+
+        function renderPage(num) {
+            pdfDoc.getPage(num).then(function (page) {
+                const viewport = page.getViewport({ scale: 1.5 });
+                pdfCanvas.height = viewport.height;
+                pdfCanvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }
+
+        // Add red points
+        pdfCanvas.addEventListener('click', function (e) {
+            ctx.beginPath();
+            ctx.arc(e.clientX, e.clientY, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+        });
+    </script>
+</body>
+
+</html>

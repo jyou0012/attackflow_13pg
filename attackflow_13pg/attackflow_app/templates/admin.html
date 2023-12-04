@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin_styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar_title">
+                <img src="{% static 'images/attack_icon.png' %}" alt="..." class = "sidebar_icon">
+                <a href="admin.html" class="site_title">
+                    <span>Attackflow</span>
+                </a>
+            </div>
+            <ul>
+                <li><a href="#" id="page1">Incident Reports</a></li>
+                <li><a href="#" id="page2">Users</li>
+                <li><a href="#" id="page3">Page 3</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="header">
+                <div class="avatar" onclick="toggleMenu()">
+                    administrator
+                  </div>
+                  <div id="menu" class="hidden">
+                    <ul>
+                      <li><a href="#login">login</a></li>
+                      <li><a href="/">logout</a></li>
+                      <li><a href="#settings">setting</a></li>
+                    </ul>
+                  </div>
+            </div>
+
+            <div class="page-content">
+                <!-- Content will go here -->
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/admin_scripts.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+graph TB
+    classDef action fill:#99ccff
+    classDef operator fill:#ff9900
+    classDef condition fill:#99ff99
+    classDef builtin fill:#cccccc
+
+    attack_action__37345417_3ee0_4e11_b421_1d4be68e6f15["<b>Action</b> - <b>T1583.002 Acquire<br>Infrastructure: Domains</b>:  - The<br>attacker obtains a phishing domain<br>similar to the target company. -<br><b>Confidence</b> Very Probable"]
+    class attack_action__37345417_3ee0_4e11_b421_1d4be68e6f15 action
+    infrastructure__0048e01d_260f_4af2_8ebc_90377f520830["<b>Infrastructure</b> - <b>Name</b>:<br>Phishing infra: blog.examp1e.com -<br><b>Description</b>: The phishing domain<br>uses a homoglyphic variant of<br>example.com. - <b>Infrastructure<br>Types</b>: phishing"]
+    class infrastructure__0048e01d_260f_4af2_8ebc_90377f520830 builtin
+    attack_condition__7e809f5b_319a_4b3f_82fe_e4dc09af5088["<b>Condition:</b> Adversary possesses a<br>phishing domain."]
+    class attack_condition__7e809f5b_319a_4b3f_82fe_e4dc09af5088 condition
+    attack_action__3ea0de71_67a6_426e_bb2f_86375c620478["<b>Action</b> - <b>T1583.003 Acquire<br>Infrastructure: Virtual Private<br>Server</b>:  - The attacker obtains a<br>VPC for hosting phishing sites. -<br><b>Confidence</b> Very Probable"]
+    class attack_action__3ea0de71_67a6_426e_bb2f_86375c620478 action
+    attack_condition__a9416f58_3fd1_4743_bd4c_6272dfd8c4e2["<b>Condition:</b> Adversary possesses<br>phishing server."]
+    class attack_condition__a9416f58_3fd1_4743_bd4c_6272dfd8c4e2 condition
+    attack_action__4f541c4c_b7bb_4b14_befd_ca8e8fe12599["<b>Action</b> - <b>T1589.002 Gather<br>Victim Identity Information: Email</b>:<br>- The attacker scrapes email addresses<br>from the corporate web site. -<br><b>Confidence</b> Very Probable"]
+    class attack_action__4f541c4c_b7bb_4b14_befd_ca8e8fe12599 action
+    attack_condition__3ace48ed_24fd_4d24_a399_62202ae6356b["<b>Condition:</b> Adversary possesses<br>list of emails."]
+    class attack_condition__3ace48ed_24fd_4d24_a399_62202ae6356b condition
+    attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be(("AND"))
+    class attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be operator
+    attack_action__d68e5201_796c_469c_b012_290b7040db02["<b>Action</b> - <b>1598.003 Phishing:<br>Spearphishing Link</b>:  - The email<br>says that the users's Outlook<br>credentials have been compromised and<br>contain a fake link to reset the<br>credentials. - <b>Confidence</b> Very<br>Probable"]
+    class attack_action__d68e5201_796c_469c_b012_290b7040db02 action
+    attack_asset__f7edf4aa_29ec_47aa_b4f6_c42dfbe2ac20["<b>Attack Asset</b> - <b>Name</b>:<br>Employee WordPress Account -<br><b>Description</b>: The employee's<br>credentials for accessing the WordPress<br>blog. - <b>Object Ref</b>: user-account<br>--ce035bd0-8e58-4d18-aefb-f1fbb031d782 -<br><b>Extensions</b>: {'extension-<br>definition--<br>fb9c968a-745b-4ade-9b25-c324172197f4':<br>{'extension_type': 'new-sdo'}}"]
+    class attack_asset__f7edf4aa_29ec_47aa_b4f6_c42dfbe2ac20 builtin
+    user_account__ce035bd0_8e58_4d18_aefb_f1fbb031d782["<b>User Account</b> - <b>Account<br>Login</b>: jdoe@example.com - <b>Account<br>Type</b>: wordpress - <b>Defanged</b>:<br>False"]
+    class user_account__ce035bd0_8e58_4d18_aefb_f1fbb031d782 builtin
+    attack_condition__2277d494_031e_4d79_b557_f31e4451a305["<b>Condition:</b> Adversary acquires an<br>employee's password in plaintext."]
+    class attack_condition__2277d494_031e_4d79_b557_f31e4451a305 condition
+    attack_action__1c0078ec_0731_4bf4_b1e5_6e3289c9c4eb["<b>Action</b> - <b>T1190 Exploit Public-<br>Facing Application</b>:  - Adversary<br>logs into corporate WordPress blog with<br>employee credentials. -<br><b>Confidence</b> Very Probable"]
+    class attack_action__1c0078ec_0731_4bf4_b1e5_6e3289c9c4eb action
+    attack_asset__5638cc2e_39b9_4a83_8edc_b6875d2cd30b["<b>Attack Asset</b> - <b>Name</b>:<br>Corporate Blog on WordPress -<br><b>Description</b>: The corporate blog<br>is hosted on a WordPress site. -<br><b>Extensions</b>: {'extension-<br>definition--<br>fb9c968a-745b-4ade-9b25-c324172197f4':<br>{'extension_type': 'new-sdo'}}"]
+    class attack_asset__5638cc2e_39b9_4a83_8edc_b6875d2cd30b builtin
+
+    attack_action__37345417_3ee0_4e11_b421_1d4be68e6f15 -->|effect| attack_condition__7e809f5b_319a_4b3f_82fe_e4dc09af5088
+    infrastructure__0048e01d_260f_4af2_8ebc_90377f520830 -->|related-to| attack_action__37345417_3ee0_4e11_b421_1d4be68e6f15
+    attack_condition__7e809f5b_319a_4b3f_82fe_e4dc09af5088 -->|on_true| attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be
+    attack_action__3ea0de71_67a6_426e_bb2f_86375c620478 -->|effect| attack_condition__a9416f58_3fd1_4743_bd4c_6272dfd8c4e2
+    infrastructure__0048e01d_260f_4af2_8ebc_90377f520830 -->|related-to| attack_action__3ea0de71_67a6_426e_bb2f_86375c620478
+    attack_condition__a9416f58_3fd1_4743_bd4c_6272dfd8c4e2 -->|on_true| attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be
+    attack_action__4f541c4c_b7bb_4b14_befd_ca8e8fe12599 -->|effect| attack_condition__3ace48ed_24fd_4d24_a399_62202ae6356b
+    attack_condition__3ace48ed_24fd_4d24_a399_62202ae6356b -->|on_true| attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be
+    attack_operator__609d7adf_a3d2_44e8_82de_4b30e3fb97be -->|effect| attack_action__d68e5201_796c_469c_b012_290b7040db02
+    attack_action__d68e5201_796c_469c_b012_290b7040db02 -->|effect| attack_condition__2277d494_031e_4d79_b557_f31e4451a305
+    attack_condition__2277d494_031e_4d79_b557_f31e4451a305 -->|on_true| attack_action__1c0078ec_0731_4bf4_b1e5_6e3289c9c4eb

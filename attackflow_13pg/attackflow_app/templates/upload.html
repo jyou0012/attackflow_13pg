@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Reports</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/upload_styles.css' %}">
+</head>
+<body>
+    <h2>Upload Reports</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Annotated Text:</h2>
+    <textarea id="editable-area" rows="10" cols="50">{{ res_content }}</textarea>
+    <!-- Uncomment the below section if you want to iterate through the content
+    <pre id="debug-area">
+        {% for item in res_content %}
+            {{ item }}<br>
+        {% endfor %}
+    </pre>s
+    -->
+    <button onclick="downloadAsJson()">Download</button>
+    <script src="{% static 'js/upload_script.js' %}"></script>
+    <button type="button" onclick="triggerValidation()">Validate with Attack-Flow</button>
+    <div id="validation-result"></div>
+    
+
+
+    <script>
+    function triggerValidation() {
+        fetch('/validate_with_attack_flow/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('validation-result').textContent = data.result;
+        });
+    }
+</script>
+
+</body>
+</html>

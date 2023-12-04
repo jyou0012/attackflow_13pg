@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Attack-Flow</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            font-weight: bold;
+            font-size: 50px;
+            margin-bottom: 50px;
+        }
+
+        .login-box {
+            background-color: #555;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .login-box h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-box button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .extra-buttons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .extra-buttons button {
+            padding: 8px;
+            background: none;
+            border: none;
+            color: #00ff00;
+            cursor: pointer;
+        }
+
+        .extra-buttons button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">Attack Flow</div>
+        <div class="login-box">
+            <h1>Login</h1>
+            <form>
+                <input type="text" placeholder="username" required>
+                <input type="password" placeholder="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="extra-buttons">
+                <button type="button">Forget password</button>
+                <button type="button">Create Account</button> <!-- 注意，这里把“Creat”改成了“Create” -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
